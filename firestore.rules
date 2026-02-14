@@ -1,0 +1,16 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ユーザーは自分自身の情報のみ読み取り可能
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // デフォルトで他の全ての読み書きを拒否
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

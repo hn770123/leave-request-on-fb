@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>休暇申請システム</title>
+</head>
+<body>
+    <h1>休暇申請システム</h1>
+
+    <!-- メッセージ表示領域 -->
+    <p id="message"></p>
+
+    <!-- ログインフォーム -->
+    <div id="login-form">
+        <h2>ログイン</h2>
+        <p>登録済みのメールアドレスを入力してください。認証用のリンクを送信します。</p>
+        <input type="email" id="email-input" placeholder="メールアドレス">
+        <button id="send-link-button">認証リンクを送信</button>
+    </div>
+
+    <!-- ログイン後に表示されるメインコンテンツ -->
+    <div id="logged-in-content" style="display: none;">
+        <!-- ユーザー情報とログアウトボタン -->
+        <div id="user-info">
+            <p><span id="user-email"></span> でログイン中</p>
+            <button id="logout-button">ログアウト</button>
+        </div>
+
+        <hr>
+
+        <!-- 休暇申請フォームのセクション -->
+        <section id="application-form-section">
+            <h2>休暇申請</h2>
+            <form id="vacation-form">
+                <p>
+                    <label for="start-date">休暇期間:</label>
+                    <input type="date" id="start-date" required>
+                    ～
+                    <input type="date" id="end-date" required>
+                </p>
+                <p>
+                    <label for="leave-type">休暇種別:</label>
+                    <select id="leave-type" required>
+                        <option value="">選択してください</option>
+                        <option value="paid-leave">有給休暇</option>
+                        <option value="compensatory-leave">代休</option>
+                        <option value="special-leave">特別休暇</option>
+                        <option value="other">その他</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="reason">理由:</label><br>
+                    <textarea id="reason" rows="4" cols="50" required></textarea>
+                </p>
+                <button type="submit">申請する</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- 申請一覧のセクション -->
+        <section id="applications-list-section">
+            <h2>申請一覧</h2>
+            <table id="applications-table" border="1" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>申請日</th>
+                        <th>休暇期間</th>
+                        <th>種別</th>
+                        <th>理由</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody id="applications-tbody">
+                    <!-- JavaScriptによって動的に申請データが挿入されます -->
+                    <tr>
+                        <td colspan="5" style="text-align: center;">現在、申請はありません。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Firebase SDK の読み込み -->
+    <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+    <script src="/__/firebase/8.10.1/firebase-auth.js"></script>
+    <script src="/__/firebase/8.10.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- 自作スクリプトの読み込み -->
+    <script src="app.js"></script>
+</body>
+</html>
